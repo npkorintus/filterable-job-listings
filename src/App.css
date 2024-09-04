@@ -1,0 +1,15 @@
+.header {
+  background-image: url('../src/assets/bg-header-mobile.svg');
+  background-color: hsl(180, 29%, 50%);
+  height: 100px;
+}
+
+.body {
+  background-color: hsl(180, 52%, 96%);
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
+    background-image: url('../src/assets/bg-header-desktop.svg');
+  }
+}
