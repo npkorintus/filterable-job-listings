@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid2';
+import Typography from '@mui/material/Typography';
 
 import './App.css';
 
@@ -26,20 +28,28 @@ function App() {
   }
 
   useEffect(() => {
-    getData()
+    getData();
   },[]);
 
   return (
     <>
       <header className='header'></header>
       <div className='body'>
-        {jobs.length > 0 ? jobs.map(job => 
-        <Grid container>
-         <Grid size='grow'>
-          <Card>{job.company}</Card>
-         </Grid>
-        </Grid>)
-        : null}
+        <Grid container spacing={2} display='flex' justifyContent='center'>
+          {jobs.length > 0 ? jobs.map(job => 
+            <Grid size={10}> 
+              <Card>
+                <CardContent>
+                  <img src={job.logo} />
+                  <Typography>
+                    {job.company}
+                  </Typography>
+                  <Typography>{job.position}</Typography>
+                </CardContent>
+                </Card>
+            </Grid>)
+          : null}
+        </Grid>
       </div>
     </>
   )
