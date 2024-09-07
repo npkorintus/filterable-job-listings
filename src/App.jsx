@@ -16,7 +16,7 @@ function App() {
 
   const getData = () => {
     fetch('../data.json', {
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
        }
@@ -57,26 +57,26 @@ function App() {
       <header className='header'></header>
       <div className='body'>
         <Grid container spacing={2} display='flex' justifyContent='center'>
-          {jobs.length > 0 ? jobs.map(job => 
-            <Grid key={job.id} size={10}> 
+          {jobs.length > 0 ? jobs.map(job =>
+            <Grid key={job.id} size={10}>
               <Paper elevation={8} component={'div'}>
                 <Card sx={{ display: 'flex', padding: '24px', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <CardMedia 
-                    component='img' 
-                    image={job.logo} 
-                    alt={`${job.company} logo`} 
+                  <CardMedia
+                    component='img'
+                    image={job.logo}
+                    alt={`${job.company} logo`}
                     // height='100'
                     // width='50'
-                    sx={{ 
+                    sx={{
                       width: '100px',
-                      // height: '10%' 
-                    }} 
+                      // height: '10%'
+                    }}
                   />
                   <Box sx={{ }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Typography>{job.company}</Typography>
-                      {job.new && <Chip label='NEW!' />}
-                      {job.featured && <Chip label='FEATURED' />}
+                      {job.new && <Chip label='NEW!' sx={{ margin: '0 4px' }} />}
+                      {job.featured && <Chip label='FEATURED' sx={{ margin: '0 4px' }} />}
                     </Box>
                     <Box>
                       <Typography>{job.position}</Typography>
@@ -90,7 +90,9 @@ function App() {
                     </Box>
                   </Box>
                   <Box>
-                    {job.filters.map(filter => <Chip key={filter} label={filter} />)}
+                    {job.filters.map(filter => (
+                      <Chip key={filter} label={filter} sx={{ borderRadius: '4px', margin: '0 8px' }} />
+                    ))}
                   </Box>
                   <CardContent>
                   </CardContent>
