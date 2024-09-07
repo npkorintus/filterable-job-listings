@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid2';
 import Paper from '@mui/material/Paper';
+import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import './App.css';
@@ -57,9 +60,19 @@ function App() {
       <header className='header'></header>
       <div className='body'>
         <Grid container spacing={2} display='flex' justifyContent='center'>
+          <Grid size={10}>
+            <Paper elevation={8} component='div'>
+              <Card sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
+                <Box>Active Filters List</Box>
+                <Box>
+                  <Typography>Clear</Typography>
+                </Box>
+              </Card>
+            </Paper>
+          </Grid>
           {jobs.length > 0 ? jobs.map(job =>
             <Grid key={job.id} size={10}>
-              <Paper elevation={8} component={'div'}>
+              <Paper elevation={8} component='div'>
                 <Card sx={{ display: 'flex', padding: '24px', justifyContent: 'space-between', alignItems: 'center' }}>
                   <CardMedia
                     component='img'
@@ -94,8 +107,8 @@ function App() {
                       <Chip key={filter} label={filter} sx={{ borderRadius: '4px', margin: '0 8px' }} />
                     ))}
                   </Box>
-                  <CardContent>
-                  </CardContent>
+                  {/* <CardContent>
+                  </CardContent> */}
                 </Card>
               </Paper>
             </Grid>)
