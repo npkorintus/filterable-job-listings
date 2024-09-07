@@ -60,7 +60,7 @@ function App() {
       <header className='header'></header>
       <div className='body'>
         <Grid container spacing={2} display='flex' justifyContent='center'>
-          <Grid size={10}>
+          <Grid size={10} sx={{ transform: 'translateY(-50%)' }}>
             <Paper elevation={8} component='div'>
               <Card sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
                 <Box>Active Filters List</Box>
