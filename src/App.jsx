@@ -65,7 +65,7 @@ function App() {
               <Card sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
                 <Box>Active Filters List</Box>
                 <Box>
-                  <Typography>Clear</Typography>
+                  <Typography className='clearFilters'>Clear</Typography>
                 </Box>
               </Card>
             </Paper>
@@ -104,7 +104,13 @@ function App() {
                   </Box>
                   <Box>
                     {job.filters.map(filter => (
-                      <Chip key={filter} label={filter} sx={{ borderRadius: '4px', margin: '0 8px' }} />
+                      <Chip
+                        className='filter'
+                        key={filter}
+                        label={filter}
+                        sx={{ borderRadius: '4px', margin: '0 8px' }}
+                        onClick={() => console.log('add filter: ', filter)}
+                      />
                     ))}
                   </Box>
                   {/* <CardContent>

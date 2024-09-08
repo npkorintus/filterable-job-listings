@@ -8,6 +8,15 @@
   background-color: hsl(180, 52%, 96%);
 }
 
+.clearFilters:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter:hover {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 768px) {
   .header {
     background-image: url('../src/assets/bg-header-desktop.svg');
