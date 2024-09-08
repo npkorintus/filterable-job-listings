@@ -5,16 +5,28 @@
 }
 
 .body {
-  background-color: hsl(180, 52%, 96%);
+  /* background-color: hsl(180, 52%, 96%); */
+  background-color: var(--background-light-gray-cyan);
 }
 
 .clearFilters:hover {
-  cursor: pointer;
-  text-decoration: underline;
+  /* cursor: pointer; */
+  /* text-decoration: underline; */
+}
+
+.filter {
+  /* color: white !important; */
+  /* background-color: black !important; */
+  /* color: var(--primary-dark-cyan); */
+  /* background-color: var(--filters-light-gray-cyan); */
 }
 
 .filter:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
+  /* color: black !important; */
+  /* background-color: white !important; */
+  /* background-color: var(--primary-dark-cyan); */
+  /* color: var(--filters-light-gray-cyan); */
 }
 
 @media only screen and (min-width: 768px) {

@@ -1,0 +1,18 @@
+:root {
+  /* colors */
+  --primary-dark-cyan: hsl(180, 29%, 50%);
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+
+  --background-light-gray-cyan: hsl(180, 52%, 96%);
+  --filters-light-gray-cyan: hsl(180, 31%, 95%);
+  --dark-gray-cyan: hsl(180, 8%, 52%);
+  --very-dark-gray-cyan: hsl(180, 14%, 20%);
+
+  /* typography */
+  --body-copy-size: 15px;
+
+  /* headings */
+  --heading-regular-weight: 500;
+  --heading-bold-weight: 700;
+}

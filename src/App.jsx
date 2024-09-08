@@ -13,9 +13,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import './App.css';
+import './styles.css';
 
 function App() {
   const [jobs, setJobs] = useState([]);
+  const [filters, setFilters] = useState([]);
 
   const getData = () => {
     fetch('../data.json', {
@@ -46,6 +48,15 @@ function App() {
     getData();
   },[]);
 
+  const applyFilter = (filter) => {
+    if (!filters.includes(filter))
+      setFilters([...filters, filter])
+  }
+  console.log('filters: ', filters)
+  const clearFilters = () => {
+    setFilters([]);
+  }
+
   const bullet = (
     <Box
       component="span"
@@ -61,14 +72,57 @@ function App() {
       <div className='body'>
         <Grid container spacing={2} display='flex' justifyContent='center'>
           <Grid size={10} sx={{ transform: 'translateY(-50%)' }}>
-            <Paper elevation={8} component='div'>
+            {filters.length > 0 && <Paper elevation={8} component='div'>
               <Card sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
-                <Box>Active Filters List</Box>
                 <Box>
-                  <Typography className='clearFilters'>Clear</Typography>
+                {filters.map(filter => (
+                      <Chip
+                        className='filter'
+                        key={filter}
+                        label={filter}
+                        sx={[
+                          {
+                            borderRadius: '4px',
+                            margin: '0 8px',
+                            color: 'var(--primary-dark-cyan)',
+                            backgroundColor: 'var(--filters-light-gray-cyan)',
+                            fontWeight: '700'
+                          },
+                          {
+                            '&:hover': {
+                              cursor: 'pointer',
+                              color: 'var(--filters-light-gray-cyan)',
+                              backgroundColor: 'var(--primary-dark-cyan)'
+                            }
+                          }
+                        ]}
+                        onClick={() => console.log('remove filter: ', filter)}
+                      />
+                    ))}
+                </Box>
+                <Box>
+                  <Typography
+                    className='clearFilters'
+                    sx={[
+                      {
+                        color: 'var(--very-dark-gray-cyan)',
+                        fontWeight: 700
+                      },
+                      {
+                        '&:hover': {
+                          cursor: 'pointer',
+                          textDecoration: 'underline',
+                          color: 'var(--primary-dark-cyan)'
+                        }
+                      }
+                    ]}
+                    onClick={() => clearFilters()}
+                  >
+                    Clear
+                  </Typography>
                 </Box>
               </Card>
-            </Paper>
+            </Paper>}
           </Grid>
           {jobs.length > 0 ? jobs.map(job =>
             <Grid key={job.id} size={10}>
@@ -89,7 +143,18 @@ function App() {
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <Typography>{job.company}</Typography>
                       {job.new && <Chip label='NEW!' sx={{ margin: '0 4px' }} />}
-                      {job.featured && <Chip label='FEATURED' sx={{ margin: '0 4px' }} />}
+                      {job.featured && (
+                        <Chip
+                          label='FEATURED'
+                          sx={[
+                            {
+                              margin: '0 4px',
+                              color: 'var(--white)',
+                              backgroundColor: 'var(--black)'
+                            },
+                          ]}
+                        />
+                      )}
                     </Box>
                     <Box>
                       <Typography>{job.position}</Typography>
@@ -108,8 +173,23 @@ function App() {
                         className='filter'
                         key={filter}
                         label={filter}
-                        sx={{ borderRadius: '4px', margin: '0 8px' }}
-                        onClick={() => console.log('add filter: ', filter)}
+                        sx={[
+                          {
+                            borderRadius: '4px',
+                            margin: '0 8px',
+                            color: 'var(--primary-dark-cyan)',
+                            backgroundColor: 'var(--filters-light-gray-cyan)',
+                            fontWeight: '700'
+                          },
+                          {
+                            '&:hover': {
+                              cursor: 'pointer',
+                              color: 'var(--filters-light-gray-cyan)',
+                              backgroundColor: 'var(--primary-dark-cyan)'
+                            }
+                          }
+                        ]}
+                        onClick={() => applyFilter(filter)}
                       />
                     ))}
                   </Box>
