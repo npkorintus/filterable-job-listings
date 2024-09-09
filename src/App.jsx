@@ -15,9 +15,15 @@ import Typography from '@mui/material/Typography';
 import './App.css';
 import './styles.css';
 
+import RemoveIcon from './assets/icon-remove.svg';
+
 function App() {
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState([]);
+
+  const DeleteIcon = () => {
+    return <img src={RemoveIcon} />
+  }
 
   const getData = () => {
     fetch('../data.json', {
@@ -57,6 +63,10 @@ function App() {
     setFilters([]);
   }
 
+  const handleDelete = () => {
+    alert('delete')
+  }
+
   const bullet = (
     <Box
       component="span"
@@ -74,8 +84,9 @@ function App() {
           <Grid size={10} sx={{ transform: 'translateY(-50%)' }}>
             {filters.length > 0 && <Paper elevation={8} component='div'>
               <Card sx={{ display: 'flex', justifyContent: 'space-between', p: '24px' }}>
-                <Box>
+                <Box display='flex'>
                 {filters.map(filter => (
+                      <Box sx={{ backgroundColor: 'var(--filters-light-gray-cyan)', borderRadius: '4px' }} display='flex' mr={2}>
                       <Chip
                         className='filter'
                         key={filter}
@@ -88,16 +99,40 @@ function App() {
                             backgroundColor: 'var(--filters-light-gray-cyan)',
                             fontWeight: '700'
                           },
+                          // {
+                          //   '&:hover': {
+                          //     cursor: 'pointer',
+                          //     color: 'var(--filters-light-gray-cyan)',
+                          //     backgroundColor: 'var(--primary-dark-cyan)'
+                          //   }
+                          // }
+                        ]}
+                        // onClick={() => console.log('remove filter: ', filter)}
+                        // onDelete={handleDelete}
+                        // deleteIcon={<DeleteIcon />}
+                      />
+                      <Box
+                        sx={[
+                          {
+                            backgroundColor: 'var(--primary-dark-cyan)',
+                            // backgroundImage: 'url(RemoveIcon)'
+                            borderRadius: '0 4px 4px 0'
+                          },
                           {
                             '&:hover': {
                               cursor: 'pointer',
-                              color: 'var(--filters-light-gray-cyan)',
-                              backgroundColor: 'var(--primary-dark-cyan)'
+                              backgroundColor: 'var(--black)'
                             }
                           }
                         ]}
-                        onClick={() => console.log('remove filter: ', filter)}
-                      />
+                        display='flex'
+                        alignItems='center'
+                        p={0.5}
+                        onClick={handleDelete}
+                      >
+                        <img className='removeFilter' src={RemoveIcon} style={{ padding: '4px' }} />
+                      </Box>
+                      </Box>
                     ))}
                 </Box>
                 <Box>
@@ -183,7 +218,7 @@ function App() {
                           },
                           {
                             '&:hover': {
-                              cursor: 'pointer',
+                              // cursor: 'pointer',
                               color: 'var(--filters-light-gray-cyan)',
                               backgroundColor: 'var(--primary-dark-cyan)'
                             }
