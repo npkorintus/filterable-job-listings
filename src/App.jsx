@@ -62,8 +62,9 @@ function App() {
     setFilters([]);
   };
 
-  const handleDelete = () => {
-    alert("delete");
+  const handleRemove = (e) => {
+    const removed = e.target.id;
+    setFilters(activeFilters => activeFilters.filter(filter => filter !== removed));
   };
 
   const bullet = (
@@ -88,6 +89,7 @@ function App() {
                     display: "flex",
                     justifyContent: "space-between",
                     p: "24px",
+                    alignItems: 'center'
                   }}
                 >
                   <Box display="flex">
@@ -113,23 +115,12 @@ function App() {
                               backgroundColor: "var(--filters-light-gray-cyan)",
                               fontWeight: "700",
                             },
-                            // {
-                            //   '&:hover': {
-                            //     cursor: 'pointer',
-                            //     color: 'var(--filters-light-gray-cyan)',
-                            //     backgroundColor: 'var(--primary-dark-cyan)'
-                            //   }
-                            // }
                           ]}
-                          // onClick={() => console.log('remove filter: ', filter)}
-                          // onDelete={handleDelete}
-                          // deleteIcon={<DeleteIcon />}
                         />
                         <Box
                           sx={[
                             {
                               backgroundColor: "var(--primary-dark-cyan)",
-                              // backgroundImage: 'url(RemoveIcon)'
                               borderRadius: "0 4px 4px 0",
                             },
                             {
@@ -142,12 +133,13 @@ function App() {
                           display="flex"
                           alignItems="center"
                           p={0.5}
-                          onClick={handleDelete}
+                          onClick={handleRemove}
                         >
                           <img
                             className="removeFilter"
                             src={RemoveIcon}
                             style={{ padding: "4px" }}
+                            id={filter}
                           />
                         </Box>
                       </Box>
@@ -158,7 +150,7 @@ function App() {
                       className="clearFilters"
                       sx={[
                         {
-                          color: "var(--very-dark-gray-cyan)",
+                          color: "var(--dark-gray-cyan)",
                           fontWeight: 700,
                         },
                         {
@@ -205,7 +197,7 @@ function App() {
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <Typography>{job.company}</Typography>
                           {job.new && (
-                            <Chip label="NEW!" sx={{ margin: "0 4px" }} />
+                            <Chip label="NEW!" sx={{ margin: "0 4px", backgroundColor: 'var(--primary-dark-cyan)', color: 'var(--white)' }} />
                           )}
                           {job.featured && (
                             <Chip
@@ -214,7 +206,7 @@ function App() {
                                 {
                                   margin: "0 4px",
                                   color: "var(--white)",
-                                  backgroundColor: "var(--black)",
+                                  backgroundColor: "var(--very-dark-gray-cyan)",
                                 },
                               ]}
                             />
