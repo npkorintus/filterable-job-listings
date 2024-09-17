@@ -20,6 +20,10 @@ import RemoveIcon from "./assets/icon-remove.svg";
 function App() {
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+  console.log('filteredJobs: ', filteredJobs)
+  console.log('filters: ', filters)
 
   const DeleteIcon = () => {
     return <img src={RemoveIcon} />;
@@ -33,7 +37,7 @@ function App() {
       },
     })
       .then((response) => {
-        console.log("response: ", response);
+        // console.log("response: ", response);
         return response.json();
       })
       .then((data) => {
@@ -45,8 +49,9 @@ function App() {
           job.languages.forEach((language) => job.filters.push(language));
           job.tools.forEach((tool) => job.filters.push(tool));
         });
-        console.log("data: ", data);
+        // console.log("data: ", data);
         setJobs(data);
+        setFilteredJobs(data);
       });
   };
 
@@ -54,10 +59,32 @@ function App() {
     getData();
   }, []);
 
+  useEffect(() => {
+    console.log('update filtered jobs')
+
+    // filters.forEach(filter => filteredJobs.filter(job => setFilteredJobs(job.filters.includes(filter))))
+    let filtered = [];
+
+    jobs.forEach(job => {
+      if (filters.every(filter => job.filters.includes(filter))) {
+        console.log(job)
+        filtered.push(job)
+        // return job; 
+      }
+      // setFilteredJobs([...filteredJobs, job])
+    })
+    setFilteredJobs(filtered)
+    
+  }, [jobs, filters])
+
   const applyFilter = (filter) => {
-    if (!filters.includes(filter)) setFilters([...filters, filter]);
+    if (!filters.includes(filter)) {
+      setFilters([...filters, filter]);
+    } 
+    // setFilters(prevFilters => [...prevFilters, filter])
   };
-  console.log("filters: ", filters);
+  // console.log("filters: ", filters);
+
   const clearFilters = () => {
     setFilters([]);
   };
@@ -161,7 +188,7 @@ function App() {
                           },
                         },
                       ]}
-                      onClick={() => clearFilters()}
+                      onClick={() => setFilters([])}
                     >
                       Clear
                     </Typography>
@@ -170,8 +197,8 @@ function App() {
               </Paper>
             )}
           </Grid>
-          {jobs.length > 0
-            ? jobs.map((job) => (
+          {filteredJobs.length > 0
+            ? filteredJobs.map((job) => (
                 <Grid key={job.id} size={10}>
                   <Paper elevation={8} component="div">
                     <Card
