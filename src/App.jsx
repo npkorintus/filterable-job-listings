@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
 import "./App.css";
@@ -25,10 +21,6 @@ function App() {
   console.log('filteredJobs: ', filteredJobs)
   console.log('filters: ', filters)
 
-  const DeleteIcon = () => {
-    return <img src={RemoveIcon} />;
-  };
-
   const getData = () => {
     fetch("../data.json", {
       headers: {
@@ -37,7 +29,6 @@ function App() {
       },
     })
       .then((response) => {
-        // console.log("response: ", response);
         return response.json();
       })
       .then((data) => {
@@ -49,7 +40,6 @@ function App() {
           job.languages.forEach((language) => job.filters.push(language));
           job.tools.forEach((tool) => job.filters.push(tool));
         });
-        // console.log("data: ", data);
         setJobs(data);
         setFilteredJobs(data);
       });
@@ -61,32 +51,22 @@ function App() {
 
   useEffect(() => {
     console.log('update filtered jobs')
-
-    // filters.forEach(filter => filteredJobs.filter(job => setFilteredJobs(job.filters.includes(filter))))
     let filtered = [];
 
     jobs.forEach(job => {
       if (filters.every(filter => job.filters.includes(filter))) {
         console.log(job)
         filtered.push(job)
-        // return job; 
       }
-      // setFilteredJobs([...filteredJobs, job])
     })
     setFilteredJobs(filtered)
-    
+
   }, [jobs, filters])
 
   const applyFilter = (filter) => {
     if (!filters.includes(filter)) {
       setFilters([...filters, filter]);
-    } 
-    // setFilters(prevFilters => [...prevFilters, filter])
-  };
-  // console.log("filters: ", filters);
-
-  const clearFilters = () => {
-    setFilters([]);
+    }
   };
 
   const handleRemove = (e) => {
@@ -213,12 +193,7 @@ function App() {
                         component="img"
                         image={job.logo}
                         alt={`${job.company} logo`}
-                        // height='100'
-                        // width='50'
-                        sx={{
-                          width: "100px",
-                          // height: '10%'
-                        }}
+                        sx={{ width: "100px" }}
                       />
                       <Box sx={{}}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -267,7 +242,6 @@ function App() {
                               },
                               {
                                 "&:hover": {
-                                  // cursor: 'pointer',
                                   color: "var(--filters-light-gray-cyan)",
                                   backgroundColor: "var(--primary-dark-cyan)",
                                 },
@@ -277,8 +251,6 @@ function App() {
                           />
                         ))}
                       </Box>
-                      {/* <CardContent>
-                  </CardContent> */}
                     </Card>
                   </Paper>
                 </Grid>
