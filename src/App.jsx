@@ -18,7 +18,7 @@ function App() {
   const [filteredJobs, setFilteredJobs] = useState([]);
 
   useEffect(() => {
-      async function loadJobs() {
+    async function loadJobs() {
       const allJobs = data || [];
 
       allJobs.filters = [];
