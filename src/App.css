@@ -1,3 +1,23 @@
+html {
+  background-color: var(--background-light-gray-cyan);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+header {
+  background-image: url('../src/assets/bg-header-mobile.svg');
+  background-color: hsl(180, 29%, 50%);
+  height: 100px;
+}
+
+main {
+  min-height: calc(100vh - 100px);
+  background-color: var(--background-light-gray-cyan);
+}
+
 .header {
   background-image: url('../src/assets/bg-header-mobile.svg');
   background-color: hsl(180, 29%, 50%);

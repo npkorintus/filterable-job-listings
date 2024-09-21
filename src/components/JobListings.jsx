@@ -8,6 +8,8 @@ import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
+// import "../styles.css";
+
 const bullet = (
   <Box
     component="span"
@@ -27,10 +29,32 @@ export default function JobListings(props) {
   };
 
   return (
-    <Grid container spacing={2} display="flex" justifyContent="center" sx={{ position: "absolute", top: "180px", width: "100%" }}>
+    <Grid
+      container
+      spacing={2}
+      display="flex"
+      justifyContent="center"
+      paddingBottom={5}
+      sx={{
+        position: "absolute",
+        top: "180px",
+        width: "100%",
+        // backgroundColor: 'var(--background-light-gray-cyan)'
+      }}
+    >
       {filteredJobs.length > 0
         ? filteredJobs.map((job) => (
-          <Grid key={job.id} size={10}>
+          <Grid
+            key={job.id}
+            size={10}
+            sx={[{
+              "&:hover": {
+                cursor:"pointer",
+                borderLeft: '4px solid var(--primary-dark-cyan)',
+                borderTopLeftRadius: '4px',
+                borderBottomLeftRadius: '4px'
+            }}]}
+          >
             <Paper elevation={8} component="div">
               <Card
                 sx={{
@@ -50,7 +74,14 @@ export default function JobListings(props) {
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography>{job.company}</Typography>
                     {job.new && (
-                      <Chip label="NEW!" sx={{ margin: "0 4px", backgroundColor: 'var(--primary-dark-cyan)', color: 'var(--white)' }} />
+                      <Chip
+                        label="NEW!"
+                        sx={{
+                          margin: "0 4px",
+                          backgroundColor: 'var(--primary-dark-cyan)',
+                          color: 'var(--white)'
+                        }}
+                      />
                     )}
                     {job.featured && (
                       <Chip

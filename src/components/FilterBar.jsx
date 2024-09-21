@@ -18,7 +18,17 @@ export default function FilterBar(props) {
   };
 
   return (
-    <Grid container spacing={2} display="flex" justifyContent="center">
+    <Grid
+      container
+      spacing={2}
+      display="flex"
+      justifyContent="center"
+      sx={{
+        position: "absolute",
+        width: "100%",
+        // backgroundColor: 'var(--background-light-gray-cyan)'
+      }}
+    >
       <Grid size={10} sx={{ transform: "translateY(-50%)" }}>
         {filters.length > 0 && (
           <Paper elevation={8} component="div">
@@ -26,7 +36,7 @@ export default function FilterBar(props) {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                p: "24px",
+                p: "20px 40px",
                 alignItems: 'center'
               }}
             >
