@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Error from "./components/Error";
 import FilterBar from "./components/FilterBar";
@@ -7,46 +7,17 @@ import Layout from "./components/Layout";
 import Loading from "./components/Loading";
 
 import useFetch from "./hooks/useFetch";
+import useAllJobs from "./hooks/useAllJobs";
+import useFilteredJobs from "./hooks/useFilteredJobs";
 
 import "./App.css";
 import "./styles.css";
 
 function App() {
   const { data, isLoading, error } = useFetch("../data.json");
-  const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState([]);
-
-  useEffect(() => {
-    async function loadJobs() {
-      const allJobs = data || [];
-
-      allJobs.filters = [];
-
-      allJobs.forEach((job) => {
-        job.filters = [];
-        job.filters.push(job.role);
-        job.filters.push(job.level);
-        job.languages.forEach((language) => job.filters.push(language));
-        job.tools.forEach((tool) => job.filters.push(tool));
-      });
-      console.log('allJobs: ', allJobs)
-      setJobs(allJobs);
-      setFilteredJobs(allJobs);
-    }
-    loadJobs();
-  }, [data]);
-
-  useEffect(() => {
-    let filtered = [];
-
-    jobs.forEach(job => {
-      if (filters.every(filter => job.filters.includes(filter))) {
-        filtered.push(job);
-      }
-    });
-    setFilteredJobs(filtered);
-  }, [jobs, filters]);
+  const { jobs } = useAllJobs(data);
+  const { filteredJobs } = useFilteredJobs(jobs, filters);
 
   return (
     <>
