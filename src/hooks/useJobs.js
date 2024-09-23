@@ -24,6 +24,23 @@ const useAllJobs = (data) => {
   }, [data]);
 
   return { jobs, filteredJobs, setJobs, setFilteredJobs };
-}
+};
 
-export default useAllJobs;
+const useFilteredJobs = (jobs, filters) => {
+  const [filteredJobs, setFilteredJobs] = useState(null);
+
+  useEffect(() => {
+    let filtered = [];
+
+    jobs.forEach(job => {
+      if (filters.every(filter => job.filters.includes(filter))) {
+        filtered.push(job);
+      }
+    });
+    setFilteredJobs(filtered);
+  }, [jobs, filters]);
+
+  return { filteredJobs, setFilteredJobs };
+};
+
+export { useAllJobs, useFilteredJobs };

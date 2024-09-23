@@ -7,8 +7,7 @@ import Layout from "./components/Layout";
 import Loading from "./components/Loading";
 
 import useFetch from "./hooks/useFetch";
-import useAllJobs from "./hooks/useAllJobs";
-import useFilteredJobs from "./hooks/useFilteredJobs";
+import { useAllJobs, useFilteredJobs } from "./hooks/useJobs";
 
 import "./App.css";
 import "./styles.css";
@@ -19,11 +18,12 @@ function App() {
   const { jobs } = useAllJobs(data);
   const { filteredJobs } = useFilteredJobs(jobs, filters);
 
+  if (isLoading || !filteredJobs.length) return <Loading />;
+
   return (
     <>
       <Layout>
-        {isLoading && <Loading />}
-        {data && (
+        {filteredJobs  && (
           <>
             <FilterBar filters={filters} setFilters={setFilters} />
             <JobListings filteredJobs={filteredJobs} filters={filters} setFilters={setFilters} />
