@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid2";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-// import "../styles.css";
+import Filter from './Filter';
 
 const bullet = (
   <Box
@@ -22,12 +22,6 @@ const bullet = (
 export default function JobListings(props) {
   const { filteredJobs, filters, setFilters } = props;
 
-  const applyFilter = (filter) => {
-    if (!filters.includes(filter)) {
-      setFilters([...filters, filter]);
-    }
-  };
-
   return (
     <Grid
       container
@@ -38,8 +32,7 @@ export default function JobListings(props) {
       sx={{
         position: "absolute",
         top: "180px",
-        width: "100%",
-        // backgroundColor: 'var(--background-light-gray-cyan)'
+        width: "100%"
       }}
     >
       {filteredJobs.length > 0
@@ -109,28 +102,7 @@ export default function JobListings(props) {
                 </Box>
                 <Box>
                   {job.filters.map((filter) => (
-                    <Chip
-                      className="filter"
-                      key={filter}
-                      label={filter}
-                      sx={[
-                        {
-                          borderRadius: "4px",
-                          margin: "0 8px",
-                          color: "var(--primary-dark-cyan)",
-                          backgroundColor:
-                            "var(--filters-light-gray-cyan)",
-                          fontWeight: "700",
-                        },
-                        {
-                          "&:hover": {
-                            color: "var(--filters-light-gray-cyan)",
-                            backgroundColor: "var(--primary-dark-cyan)",
-                          },
-                        },
-                      ]}
-                      onClick={() => applyFilter(filter)}
-                    />
+                    <Filter key={filter} filter={filter} filters={filters} setFilters={setFilters} />
                   ))}
                 </Box>
               </Card>
