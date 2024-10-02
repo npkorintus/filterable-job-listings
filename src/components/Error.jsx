@@ -17,7 +17,7 @@ export default function Error({ error }) {
             <CardHeader title="Uh Oh!" subheader="We've encountered an error..." />
             <CardContent>
               <Typography gutterBottom variant='body1'>{`Error: ${error}`}</Typography>
-              <Typography variant='body2'>Please reload the page to try fetching data again.</Typography>
+              <Typography variant='body2'>We apologize for any inconvience. Please contact us or try again later.</Typography>
             </CardContent>
           </Card>
         </Paper>
