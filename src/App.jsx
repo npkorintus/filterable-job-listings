@@ -24,25 +24,21 @@ const theme = createTheme({
 })
 
 function App() {
-  const { data, isLoading, error } = useFetch("../data.json");
+  const { data, isLoading, error } = useFetch("/data/jobs.json");
   const [filters, setFilters] = useState([]);
   const { jobs } = useAllJobs(data);
   const { filteredJobs } = useFilteredJobs(jobs, filters);
 
   console.log(filteredJobs)
-  if (isLoading || !filteredJobs.length) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (error) return <Error error={error} />
 
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        {filteredJobs  && (
-          <>
-            <FilterBar filters={filters} setFilters={setFilters} />
-            <JobListings filteredJobs={filteredJobs} filters={filters} setFilters={setFilters} />
-          </>
-        )}
-        {error && <Error error={error} />}
-      </Layout>
+        <FilterBar filters={filters} setFilters={setFilters} />
+        <JobListings filteredJobs={filteredJobs} filters={filters} setFilters={setFilters} />
+    </Layout>
     </ThemeProvider>
   );
 }
