@@ -8,8 +8,14 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 import Job from './Job';
 
+import { useFilteredJobs } from '../hooks/useJobs';
+import mapJobFilters from '../utils/mapJobFilters';
+
 export default function JobListings(props) {
-  const { filteredJobs, filters, setFilters } = props;
+  const { allJobs, filters, setFilters } = props;
+  const { filteredJobs } = useFilteredJobs(mapJobFilters(allJobs), filters);
+
+  if (!filteredJobs?.length) return null;
 
   return (
     filteredJobs?.length > 0 ?

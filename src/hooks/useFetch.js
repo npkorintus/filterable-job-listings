@@ -6,6 +6,8 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // simulate a delay of 1 second (1000 milliseconds)
+    setTimeout(() => {
       fetch(url, {
         headers: {
           "Content-Type": "application/json",
@@ -20,19 +22,16 @@ const useFetch = (url) => {
         return response.json();
       })
       .then(data => {
-        setTimeout(() => {
-          setIsLoading(false);
-          setData(data);
-          setError(null);
-        }, 1000);
+        setIsLoading(false);
+        setData(data);
+        setError(null);
       })
       .catch(err => {
         console.error(`Error: ${err}`)
-        setTimeout(() => {
-          setIsLoading(false);
-          setError(err.message);
-        }, 1000);
+        setIsLoading(false);
+        setError(err.message);
       })
+    }, 1000); // 1 second delay
   }, [url])
 
   return { data, isLoading, error };

@@ -9,7 +9,6 @@ import Layout from "./components/Layout";
 import Loading from "./components/Loading";
 
 import useFetch from "./hooks/useFetch";
-import { useAllJobs, useFilteredJobs } from "./hooks/useJobs";
 
 import "./App.css";
 import "./styles.css";
@@ -26,18 +25,15 @@ const theme = createTheme({
 function App() {
   const { data, isLoading, error } = useFetch("/data/jobs.json");
   const [filters, setFilters] = useState([]);
-  const { jobs } = useAllJobs(data);
-  const { filteredJobs } = useFilteredJobs(jobs, filters);
 
-  console.log(filteredJobs)
   if (isLoading) return <Loading />;
-  if (error) return <Error error={error} />
+  if (error) return <Error error={err} />;
 
   return (
     <ThemeProvider theme={theme}>
       <Layout>
         <FilterBar filters={filters} setFilters={setFilters} />
-        <JobListings filteredJobs={filteredJobs} filters={filters} setFilters={setFilters} />
+        <JobListings allJobs={data} filters={filters} setFilters={setFilters} />
     </Layout>
     </ThemeProvider>
   );

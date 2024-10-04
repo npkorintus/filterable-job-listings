@@ -4,40 +4,24 @@ const useAllJobs = (data) => {
   const [jobs, setJobs] = useState(undefined);
 
   useEffect(() => {
-    // async function loadJobs() {
-    //   const allJobs = data || [];
-
-    //   allJobs.filters = [];
-
-    //   allJobs.forEach((job) => {
-    //     job.filters = [];
-    //     job.filters.push(job.role);
-    //     job.filters.push(job.level);
-    //     job.languages.forEach((language) => job.filters.push(language));
-    //     job.tools.forEach((tool) => job.filters.push(tool));
-    //   });
-    //   setJobs(allJobs);
-    // }
-    // loadJobs();
     const allJobs = data || [];
 
-      allJobs.filters = [];
+    allJobs.forEach((job) => {
+      job.filters = [];
+      job.filters.push(job.role);
+      job.filters.push(job.level);
+      job.languages.forEach((language) => job.filters.push(language));
+      job.tools.forEach((tool) => job.filters.push(tool));
+    });
 
-      allJobs.forEach((job) => {
-        job.filters = [];
-        job.filters.push(job.role);
-        job.filters.push(job.level);
-        job.languages.forEach((language) => job.filters.push(language));
-        job.tools.forEach((tool) => job.filters.push(tool));
-      });
-      setJobs(allJobs);
+    setJobs(allJobs);
   }, [data]);
 
   return { jobs, setJobs };
 };
 
 const useFilteredJobs = (jobs, filters) => {
-  const [filteredJobs, setFilteredJobs] = useState(undefined);
+  const [filteredJobs, setFilteredJobs] = useState(jobs);
 
   useEffect(() => {
     let filtered = [];
