@@ -13,6 +13,9 @@ import useFetch from "./hooks/useFetch";
 import "./App.css";
 import "./styles.css";
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+console.log('apiBaseUrl: ', apiBaseUrl)
+
 const theme = createTheme({
   typography: {
     fontFamily: ['League Spartan'],
@@ -27,7 +30,7 @@ function App() {
   const [filters, setFilters] = useState([]);
 
   if (isLoading) return <Loading />;
-  if (error) return <Error error={err} />;
+  if (error) return <Error error={error} />;
 
   return (
     <ThemeProvider theme={theme}>
