@@ -60,7 +60,7 @@ export default function Job(props) {
             alignItems: "center",
           }}
         >
-          <Box component="span" display="flex">
+          <Box component="span" sx={{ display: { xs: 'block', sm: 'flex' } }}>
             <CardMedia
               component="img"
               image={job.logo}

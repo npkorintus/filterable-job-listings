@@ -13,9 +13,6 @@ import useFetch from "./hooks/useFetch";
 import "./App.css";
 import "./styles.css";
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-console.log('apiBaseUrl: ', apiBaseUrl)
-
 const theme = createTheme({
   typography: {
     fontFamily: ['League Spartan'],

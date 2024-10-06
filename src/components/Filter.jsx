@@ -78,7 +78,7 @@ export default function Filter(props) {
         sx={[
           {
             borderRadius: "4px",
-            margin: "0 8px",
+            margin: "8px",
             color: "var(--primary-dark-cyan)",
             backgroundColor: "var(--filters-light-gray-cyan)",
             fontWeight: "700",
