@@ -29,16 +29,16 @@ export default function FilterBar(props) {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                p: "20px 40px",
+                p: { xs: "16px", sm: "20px 40px" },
                 alignItems: 'center'
               }}
             >
-              <Box display="flex">
+              <Box display="flex" flexWrap="wrap" >
                 {filters.map((filter) => (
                   <Filter key={filter} filter={filter} filters={filters} setFilters={setFilters} removable />
                 ))}
               </Box>
-              <Box>
+              <Box m={1}>
                 <Typography
                   className="clearFilters"
                   sx={[

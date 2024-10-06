@@ -28,7 +28,7 @@ export default function Filter(props) {
           borderRadius: "4px",
         }}
         display="flex"
-        mr={2}
+        m={1}
       >
         <Chip
           className="filter"
