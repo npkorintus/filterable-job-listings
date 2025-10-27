@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -43,6 +41,7 @@ export default function Job(props) {
       key={job.id}
       size={10}
       sx={[{
+        borderLeft: '4px solid transparent',
         "&:hover": {
           cursor: "pointer",
           borderLeft: '4px solid var(--primary-dark-cyan)',

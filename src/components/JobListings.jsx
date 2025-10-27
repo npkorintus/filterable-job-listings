@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid2";
 import Typography from '@mui/material/Typography';
@@ -15,7 +13,7 @@ export default function JobListings(props) {
   const { allJobs, filters, setFilters } = props;
   const { filteredJobs } = useFilteredJobs(mapJobFilters(allJobs), filters);
 
-  if (!filteredJobs?.length) return null;
+  // if (!filteredJobs?.length) return null;
 
   return (
     filteredJobs?.length > 0 ?
